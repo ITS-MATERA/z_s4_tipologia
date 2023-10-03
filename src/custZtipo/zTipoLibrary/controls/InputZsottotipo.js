@@ -191,12 +191,17 @@ sap.ui.define(['jquery.sap.global',
           var table = oView.byId("_libTableSottotipo");
           var selectedItem = table.getSelectedItem();
           
-          var key = selectedItem.data("ZcodSottotipo");
-          var text = selectedItem.data("Zsottotipo");
-          self.setKey(key);  
-          // self.setValue(text);
-          self.setValue(selectedItem.data("Ztipo") + " " + selectedItem.data("Zsottotipo") + " - " + selectedItem.data("ZcodTipo") + " " +  selectedItem.data("ZcodSottotipo"));
-          
+          if(selectedItem){
+            var key = selectedItem.data("ZcodSottotipo");
+            var text = selectedItem.data("Zsottotipo");
+            self.setKey(key);  
+            self.setValue(selectedItem.data("Ztipo") + " " + selectedItem.data("Zsottotipo") + " - " + selectedItem.data("ZcodTipo") + " " +  selectedItem.data("ZcodSottotipo"));
+          }
+          else{
+            self.setKey(key); 
+            self.setValue(null);
+          }
+
           if(self._libSottotipoDialog){
             self._libSottotipoDialog.then(function(oDialog){
               oDialog.close();

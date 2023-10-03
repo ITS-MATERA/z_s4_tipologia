@@ -166,13 +166,17 @@ sap.ui.define(['jquery.sap.global',
           var table = oView.byId("_libTableTipo");
           var selectedItem = table.getSelectedItem();
           
-          var key = selectedItem.data("ZcodTipo");
-          var text = selectedItem.data("Ztipo");
-          // console.log(key + " - " + text);//TODO:da canc
+          if(selectedItem){
+            var key = selectedItem.data("ZcodTipo");
+            var text = selectedItem.data("Ztipo");
+            self.setKey(key);  
+            self.setValue(text + " - " + key);
+          }
+          else{
+            self.setKey(null);  
+            self.setValue(null);
+          }
 
-          self.setKey(key);  
-          self.setValue(text + " - " + key);
-          
           if(self._libTipoDialog){
             self._libTipoDialog.then(function(oDialog){
               oDialog.close();
