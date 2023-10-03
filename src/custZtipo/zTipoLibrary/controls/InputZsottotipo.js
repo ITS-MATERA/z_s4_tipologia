@@ -97,9 +97,7 @@ sap.ui.define(['jquery.sap.global',
         });
 
         self._libGetViewId(self,function(callback) {
-          console.log(callback);
           if(!self._libSottotipoDialog){
-            console.log("qui");
             self._libSottotipoDialog = Fragment.load({
               id: callback.Id,
               name: "custZtipo.zTipoLibrary.fragment._libSTDialog",
@@ -172,7 +170,7 @@ sap.ui.define(['jquery.sap.global',
             oDataModel.read("/ZhfSottotipoSet" , {
                 filters: filters,    
                 success: function(data, oResponse){
-                  console.log(data);
+                  // console.log(data);
                   entity.setProperty("/TipoResults",data.results);
                   entity.setProperty("/PanelFilterVisible",false);
                   entity.setProperty("/PanelContentVisible",true);
