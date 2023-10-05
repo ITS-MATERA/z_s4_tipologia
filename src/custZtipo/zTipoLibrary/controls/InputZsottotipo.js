@@ -196,7 +196,7 @@ sap.ui.define(['jquery.sap.global',
             self.setValue(selectedItem.data("Ztipo") + " " + selectedItem.data("Zsottotipo") + " - " + selectedItem.data("ZcodTipo") + " " +  selectedItem.data("ZcodSottotipo"));
           }
           else{
-            self.setKey(key); 
+            self.setKey(null); 
             self.setValue(null);
           }
 
