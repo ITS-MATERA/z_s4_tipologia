@@ -9,23 +9,23 @@
       <Panel  visible="{EntityModelTipo>/PanelFilterVisible}" >
         <l:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0">
             <!-- test -->
-          <Label text="Ente:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-          <Input value="{EntityModelTipo>/Bukrs}"  enabled="false" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+          <Label text="Ente:" class="sapUiTinyMarginTop" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+          <Input value="{EntityModelTipo>/Bukrs}" maxLength="4" enabled="false" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
                       
-          <Label text="Codice Titolo:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-          <Input value="{EntityModelTipo>/CodTitolo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+          <Label text="Codice Titolo:" class="sapUiTinyMarginTop" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+          <Input value="{EntityModelTipo>/CodTitolo}" maxLength="11"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
           
-          <Label text="Codice Tipologia:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-          <Input value="{EntityModelTipo>/CodTipologia}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+          <Label text="Codice Tipologia:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+          <Input value="{EntityModelTipo>/CodTipologia}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
           
-          <Label text="Descrizione Tipologia:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-          <Input value="{EntityModelTipo>/DescTipologia}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+          <Label text="Descrizione Tipologia:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+          <Input value="{EntityModelTipo>/DescTipologia}" maxLength="50"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
           
-          <Label text="Cod. Sottotipologia I livello:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-          <Input value="{EntityModelTipo>/CodSottotipologia1Liv}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+          <Label text="Cod. Sottotipologia I livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+          <Input value="{EntityModelTipo>/CodSottotipologia1Liv}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
 
-          <Label text="Descrizione Sottotipologia I livello:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-          <Input value="{EntityModelTipo>/DescSottotipologia1Liv}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+          <Label text="Descrizione Sottotipologia I livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+          <Input value="{EntityModelTipo>/DescSottotipologia1Liv}" maxLength="50"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
          </l:Grid>
       </Panel>
     <Panel visible="{EntityModelTipo>/PanelContentVisible}">
@@ -34,7 +34,7 @@
         items="{
           path: 'EntityModelTipo>/TipoResults'
         }"
-        mode="SingleSelectMaster"
+        mode="MultiSelect"
         growing="true"
         width="auto"> 
         <columns>

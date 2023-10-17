@@ -2,17 +2,18 @@ sap.ui.define(['jquery.sap.global',
     "sap/ui/model/json/JSONModel",
 		'./../library',
 		"sap/m/Input",
+    "sap/m/MultiInput",
 		"sap/ui/model/Filter",
 		"sap/ui/model/FilterOperator",
 		"sap/ui/layout/form/SimpleForm",
 		"sap/ui/model/resource/ResourceModel",
     'sap/ui/core/Fragment'
 	],
-	function(jQuery, JSONModel,library, Input, Filter, FilterOperator, SimpleForm, ResourceModel, Fragment) {
+	function(jQuery, JSONModel,library, Input,MultiInput, Filter, FilterOperator, SimpleForm, ResourceModel, Fragment) {
 		"use strict";
 
     const MODEL_TIPO_ENTITY = "EntityModelTipo";
-    var oInputZTipo = Input.extend("custZtipo.zTipoLibrary.controls.InputZtipo", {
+    var oInputZTipo = MultiInput.extend("custZtipo.zTipoLibrary.controls.InputZtipo", {
 			metadata: {
 				library: "custZtipo.zTipoLibrary",
 				properties: {
@@ -20,7 +21,7 @@ sap.ui.define(['jquery.sap.global',
 						type: "string",
 						defaultValue: "Scegli Tipologia"
 					},
-          value: {
+          keydesc: {
 						type: "string",
 						defaultValue: ""
 					},
@@ -35,13 +36,17 @@ sap.ui.define(['jquery.sap.global',
           showValueHelp:{
             type:"string",
             defaultValue:"true"
+          },
+          valueHelpOnly:{
+            type:"string",
+            defaultValue:"true"
           }
 				},
 				aggregations: {},
 				events: {},
 				renderer: {
 					writeInnerAttributes: function(oRm, oInput) {
-						sap.m.InputRenderer.writeInnerAttributes.apply(this, arguments);
+						sap.m.MultiInputRenderer.writeInnerAttributes.apply(this, arguments);
 					}
 				}
 			},
@@ -49,21 +54,25 @@ sap.ui.define(['jquery.sap.global',
       init: function() {
         var self=this;
 				// this.bRendering = false;
-				Input.prototype.init.call(this);  
+				//Input.prototype.init.call(this);  
+        MultiInput.prototype.init.call(this);  
         self.attachValueHelpRequest(self._libOnShowDialogTipo);  
         self.attachSubmit(self._libOnSubmitTipo);  
 			},
 
       _libOnSubmitTipo:function(oEvent){
-        var self =this;
+        var self =this,
+          multiInput = sap.ui.getCore().byId(self.getId());
         if(!self.getValue() || self.getValue() === null || self.getValue()===""){
-          self.setValue(null);
+          multiInput.setTokens([]);
+          // self.setValue(null);
           self.setKey(null);  
+          self.setKeydesc(null);  
         }
       },
 
 			renderer: function(oRm, oInput) {
-				sap.m.InputRenderer.render(oRm, oInput);
+				sap.m.MultiInputRenderer.render(oRm, oInput);
 			},
 
       onAfterRendering: function() {
@@ -71,7 +80,6 @@ sap.ui.define(['jquery.sap.global',
       },
 
       _libOnShowDialogTipo:function(oEvent){
-        console.log(oEvent);
         var self =this;
         var oModelJson = new JSONModel({
           PanelFilterVisible:true,
@@ -118,7 +126,6 @@ sap.ui.define(['jquery.sap.global',
           model = oEvent.getSource().getParent().getModel(MODEL_TIPO_ENTITY).getData();
 
           self._globalModelHelperHelper = new sap.ui.model.odata.v2.ODataModel({
-            // serviceUrl: "/sap/opu/odata/sap/ZS4_NOTEIMPUTAZIONI_SRV/"
             serviceUrl: "/sap/opu/odata/sap/ZSS4_MATCHCODE_SRV/"
           });
 
@@ -140,7 +147,7 @@ sap.ui.define(['jquery.sap.global',
           if(model.DescSottotipologia1Liv && model.DescSottotipologia1Liv !== "")
             filters.push(new Filter({path: "Ztipo",operator: FilterOperator.EQ,value1: model.DescSottotipologia1Liv}));
           
-          console.log(self._globalModelHelperHelper);
+          // console.log(self._globalModelHelperHelper);
           var oDataModel = self._globalModelHelperHelper;
 
           self._globalModelHelperHelper.metadataLoaded().then(function() {
@@ -163,19 +170,24 @@ sap.ui.define(['jquery.sap.global',
         var self =this;
         self._libGetViewId(self,function(callback) {
           var oView = callback.oView;
+          var multiInput = sap.ui.getCore().byId(self.getId());          
           var table = oView.byId("_libTableTipo");
-          var selectedItem = table.getSelectedItem();
+          var selectedItems = table.getSelectedItems();
           
-          if(selectedItem){
-            var key = selectedItem.data("ZcodTipo");
-            var text = selectedItem.data("Ztipo");
-            self.setKey(key);  
-            self.setValue(text + " - " + key);
+          var tokens = [],
+            keys=[],
+            values=[];
+          if(selectedItems.length>0){
+            for(var i=0; i<selectedItems.length;i++){
+              var selectedItem= selectedItems[i];
+              tokens.push(new sap.m.Token({text:selectedItem.data("Ztipo"), key:selectedItem.data("ZcodTipo")}));
+              keys.push(selectedItem.data("ZcodTipo"));
+              values.push(selectedItem.data("Ztipo"));
+            }
           }
-          else{
-            self.setKey(null);  
-            self.setValue(null);
-          }
+          multiInput.setTokens(tokens);
+          self.setKey(keys);  
+          self.setKeydesc(values);  
 
           if(self._libTipoDialog){
             self._libTipoDialog.then(function(oDialog){

@@ -9,26 +9,28 @@
       <Panel  visible="{EntityModelSottotipo>/PanelFilterVisible}" >
         <l:Grid defaultSpan="XL12 L12 M12 S12" vSpacing="0">
             
-            <Label text="Ente:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/Bukrs}"  enabled="false" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Ente:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <Input value="{EntityModelSottotipo>/Bukrs}" maxLength="4"  enabled="false" ><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
                         
-            <Label text="Codice Titolo:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/CodTitolo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Codice Titolo:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <Input value="{EntityModelSottotipo>/CodTitolo}" maxLength="11"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
            
-            <Label text="Codice Tipologia:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/CodTipologia}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Codice Tipologia:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <Input value="{EntityModelSottotipo>/CodTipologia}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
            
-            <Label text="Codice Sottotipologia I Livello:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/ZcodTipo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Codice Sottotipologia I Livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <!-- <Input value="{EntityModelSottotipo>/ZcodTipo}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input> -->
+            <MultiInput id="_libZcodTipo" showValueHelp="false" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></MultiInput>
 
-            <Label text="Descr. Sottotipologia I Livello:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/Ztipo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Descr. Sottotipologia I Livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <!-- <Input value="{EntityModelSottotipo>/Ztipo}" maxLength="50"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input> -->
+            <MultiInput id="_libZTipo"  showValueHelp="false" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></MultiInput>
                       
-            <Label text="Codice Sottotipologia II Livello:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/ZcodSottotipo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Codice Sottotipologia II Livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <Input value="{EntityModelSottotipo>/ZcodSottotipo}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
            
-            <Label text="Descrizione Sottotipologia II Livello:" ><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
-            <Input value="{EntityModelSottotipo>/Zsottotipo}"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
+            <Label text="Descrizione Sottotipologia II Livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
+            <Input value="{EntityModelSottotipo>/Zsottotipo}" maxLength="50"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
            
          </l:Grid>
       </Panel>
@@ -38,7 +40,7 @@
         items="{
           path: 'EntityModelSottotipo>/TipoResults'
         }"
-        mode="SingleSelectMaster"
+        mode="MultiSelect"
         growing="true"
         width="auto"> 
         <columns>
