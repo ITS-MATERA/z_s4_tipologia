@@ -43,9 +43,9 @@ sap.ui.define(['jquery.sap.global',
           }
 				},
 				aggregations: {},
-				events: {},
+				events: {        },
 				renderer: {
-					writeInnerAttributes: function(oRm, oInput) {
+					writeInnerAttributes: function(oRm, oInputZTipo) {
 						sap.m.MultiInputRenderer.writeInnerAttributes.apply(this, arguments);
 					}
 				}
@@ -57,15 +57,36 @@ sap.ui.define(['jquery.sap.global',
 				//Input.prototype.init.call(this);  
         MultiInput.prototype.init.call(this);  
         self.attachValueHelpRequest(self._libOnShowDialogTipo);  
-        self.attachSubmit(self._libOnSubmitTipo);  
+        self.attachSubmit(self._libOnSubmitTipo); 
+        self.attachTokenUpdate(self._removeToken);
 			},
+
+      _removeToken:function(oEvent){
+        var self =this,
+          params = oEvent.getParameters(),
+          multiInput = sap.ui.getCore().byId(self.getId()),
+          keys=[],
+          values=[];
+
+        for(var i=0; i<params.removedTokens.length;i++){
+          var item= params.removedTokens[i];
+          multiInput.removeToken(item);
+        }
+        for(var i=0; i<multiInput.getTokens().length;i++){
+          var item= multiInput.getTokens()[i];
+          keys.push(item.getKey());
+          values.push(item.getText());
+        }
+
+        self.setKey(keys);  
+        self.setKeydesc(values);        
+      },
 
       _libOnSubmitTipo:function(oEvent){
         var self =this,
           multiInput = sap.ui.getCore().byId(self.getId());
         if(!self.getValue() || self.getValue() === null || self.getValue()===""){
           multiInput.setTokens([]);
-          // self.setValue(null);
           self.setKey(null);  
           self.setKeydesc(null);  
         }

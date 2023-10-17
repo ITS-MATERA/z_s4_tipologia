@@ -71,7 +71,29 @@ sap.ui.define(['jquery.sap.global',
 				MultiInput.prototype.init.call(this);  
         self.attachValueHelpRequest(self._libOnShowDialogSottotipo);  
         self.attachSubmit(self._libOnSubmitSottotipo);  
+        self.attachTokenUpdate(self._removeToken);
 			},
+
+      _removeToken:function(oEvent){
+        var self =this,
+          params = oEvent.getParameters(),
+          multiInput = sap.ui.getCore().byId(self.getId()),
+          keys=[],
+          values=[];
+
+        for(var i=0; i<params.removedTokens.length;i++){
+          var item= params.removedTokens[i];
+          multiInput.removeToken(item);
+        }
+        for(var i=0; i<multiInput.getTokens().length;i++){
+          var item= multiInput.getTokens()[i];
+          keys.push(item.getKey());
+          values.push(item.getText());
+        }
+
+        self.setKey(keys);  
+        self.setKeydesc(values);        
+      },
 
       _libOnSubmitSottotipo:function(oEvent){
         var self =this, 
@@ -154,13 +176,6 @@ sap.ui.define(['jquery.sap.global',
                 }
               }
               _libZTipo.setTokens(tokens);
-
-              // var fnValidator = function(args){
-              //   // console.log(args);
-              //   var text = args.text;
-              //   return new sap.m.Token({text:text, key:text});
-              // };
-
               _libZcodTipo.addValidator(fnValidator);
             }
 
@@ -168,22 +183,6 @@ sap.ui.define(['jquery.sap.global',
           });
         });
       },
-
-      // onktm:function(oEvent){
-      //   console.log(oEvent);
-      // },
-
-      // fnValidator:function(args){
-      //   console.log(args);
-			// 	var text = args.text;
-			// 	return new Token({key: text, text: text});
-			// },
-
-
-      // _libZcodTipoSubmit:function(oEvent){
-      //   var self =this;
-      //   console.log(oEvent);
-      // },
 
       _libFormatCodTipologia:function(tipoDesc){
         var text="";
