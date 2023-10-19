@@ -24,7 +24,7 @@
 
             <Label text="Descr. Sottotipologia I Livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
             <!-- <Input value="{EntityModelSottotipo>/Ztipo}" maxLength="50"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input> -->
-            <MultiInput id="_libZTipo"  showValueHelp="false" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></MultiInput>
+            <MultiInput id="_libZTipo"  showValueHelp="false" maxLength="50"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></MultiInput>
                       
             <Label text="Codice Sottotipologia II Livello:" class="sapUiTinyMarginTop"><layoutData><l:GridData span="XL2 L2 M6 S12" /></layoutData></Label>
             <Input value="{EntityModelSottotipo>/ZcodSottotipo}" maxLength="3"><layoutData><l:GridData span="XL10 L10 M6 S12" /></layoutData></Input>
