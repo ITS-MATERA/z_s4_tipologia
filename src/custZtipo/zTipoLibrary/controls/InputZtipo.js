@@ -201,7 +201,9 @@ sap.ui.define(['jquery.sap.global',
           if(selectedItems.length>0){
             for(var i=0; i<selectedItems.length;i++){
               var selectedItem= selectedItems[i];
-              tokens.push(new sap.m.Token({text:selectedItem.data("Ztipo"), key:selectedItem.data("ZcodTipo")}));
+              var text = selectedItem.data("Ztipo") + " - " + selectedItem.data("ZcodTipo");
+              //tokens.push(new sap.m.Token({text:selectedItem.data("Ztipo"), key:selectedItem.data("ZcodTipo")}));
+              tokens.push(new sap.m.Token({text:text, key:selectedItem.data("ZcodTipo")}));
               keys.push(selectedItem.data("ZcodTipo"));
               values.push(selectedItem.data("Ztipo"));
             }
